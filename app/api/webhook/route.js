@@ -46,7 +46,7 @@ export async function POST(req) {
         const audioResponse = await fetch(downloadUrl);
         const audioBlob = await audioResponse.blob();
         
-        const voiceFile = new File([audioBlob], "voice.oga", { type: "audio/ogg" });
+        const voiceFile = new File([audioBlob], "voice.ogg", { type: "audio/ogg" });
         
         const transcription = await groq.audio.transcriptions.create({
           file: voiceFile,
