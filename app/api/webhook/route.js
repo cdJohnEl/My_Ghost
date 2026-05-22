@@ -100,7 +100,7 @@ export async function POST(req) {
           { role: "system", content: "You are a tech ghostwriter. Return 1 LinkedIn post and 1 X post." },
           { role: "user", content: textToProcess }
         ],
-        model: "llama3-8b-8192",
+        model: "llama-3.1-8b-instant",
         temperature: 0.7,
       });
       generatedContent = completion.choices[0]?.message?.content || 'Generation failed.';
