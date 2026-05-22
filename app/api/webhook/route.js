@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Groq } from 'groq-sdk';
-import { db, admin } from '@/lib/firebaseAdmin';
+import { getDb, admin } from '@/lib/firebaseAdmin';
 
 export const runtime = 'nodejs'; // Ensure we are NOT on Edge runtime
 
@@ -46,7 +46,6 @@ export async function POST(req) {
         const audioResponse = await fetch(downloadUrl);
         const audioBlob = await audioResponse.blob();
         
-        // Use Blob instead of File if File constructor is causing issues
         const voiceFile = new File([audioBlob], "voice.oga", { type: "audio/ogg" });
         
         const transcription = await groq.audio.transcriptions.create({
@@ -75,6 +74,9 @@ export async function POST(req) {
 
     // 3. Firestore Logging
     console.log("[Webhook] Step 3: Firestore write...");
+    const db = getDb();
+    if (!db) throw new Error("Firestore not initialized. Check your credentials.");
+
     try {
       const postRef = await db.collection('posts').add({
         chatId,
