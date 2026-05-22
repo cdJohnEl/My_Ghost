@@ -17,9 +17,9 @@ export default function Home() {
         <Link href="/dashboard" className="btn-primary text-lg px-8 py-4">
           Open Dashboard
         </Link>
-        <a 
-          href="https://t.me/your_bot_username" 
-          target="_blank" 
+        <a
+          href="https://t.me/cdjohnel_ghost_bot"
+          target="_blank"
           rel="noopener noreferrer"
           className="btn-secondary text-lg px-8 py-4"
         >
